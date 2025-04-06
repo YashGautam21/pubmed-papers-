@@ -7,9 +7,9 @@ A Python tool to fetch research papers from PubMed based on a user-specified que
 The project is organized into two main components:
 
 1. **`pubmed_papers` Module**: Core functionality for interacting with the PubMed API and processing papers.
-   - `PubMedClient`: Handles API interactions and paper parsing
-   - Data classes for structured representation of papers and authors
-   - Utility functions for affiliation detection and data formatting
+   - `fetcher.py`: Handles API interactions and paper parsing via `get_papers()` function
+   - `formatter.py`: Contains the `papers_to_csv()` function for data formatting
+   - Data structures for representing papers and authors
 
 2. **Command-line Interface**: A user-friendly CLI for accessing the module functionality.
 
@@ -17,7 +17,7 @@ The project is organized into two main components:
 
 ### Prerequisites
 
-- Python 3.8+
+- Python 3.8.1+
 - Git
 - [Poetry](https://python-poetry.org/docs/#installation) (for dependency management)
 
@@ -41,6 +41,12 @@ This will set up all required dependencies and install the `get-papers-list` com
 ### Basic Usage
 
 ```bash
+get-papers-list "cancer therapy"
+```
+
+Or if running from the project directory:
+
+```bash
 poetry run get-papers-list "cancer therapy"
 ```
 
@@ -56,12 +62,12 @@ This will search for papers about "cancer therapy" that have at least one author
 
 Search for papers about COVID-19 vaccines and save to a file:
 ```bash
-poetry run get-papers-list "COVID-19 vaccine" -f covid_papers.csv
+get-papers-list "COVID-19 vaccine" -f covid_papers.csv
 ```
 
 Search for papers with detailed query and debug information:
 ```bash
-poetry run get-papers-list "alzheimer's disease AND (treatment OR therapy) AND 2020:2023[pdat]" -d
+get-papers-list "alzheimer's disease AND (treatment OR therapy) AND 2020:2023[pdat]" -d
 ```
 
 ## Development
@@ -72,7 +78,8 @@ poetry run get-papers-list "alzheimer's disease AND (treatment OR therapy) AND 2
 pubmed-papers/
 ├── pubmed_papers/
 │   ├── __init__.py
-│   └── ... (module files)
+│   ├── fetcher.py
+│   └── formatter.py
 ├── cli.py
 ├── pyproject.toml
 ├── README.md
@@ -86,8 +93,10 @@ pubmed-papers/
 - **Rich**: Enhanced terminal output
 - **mypy**: Static type checking
 - **pytest**: Testing framework
-- **ChatGPT**: Used for initial code structure and assistance with PubMed API integration
+- **Black**: Code formatting
+- **isort**: Import sorting
+- **flake8**: Linting
 
 ## License
 
-This project is licensed under the MIT License - see the LICENSE file for details.  
+This project is licensed under the MIT License - see the LICENSE file for details.

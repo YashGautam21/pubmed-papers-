@@ -7,7 +7,7 @@ readme = "README.md"
 packages = [{include = "pubmed_papers"}]
 
 [tool.poetry.dependencies]
-python = "^3.8"
+python = "^3.8.1"  # Changed from ^3.8 to ^3.8.1
 requests = "^2.31.0"
 rich = "^13.4.2"
 
